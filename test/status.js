@@ -31,7 +31,7 @@ describe('Status', function() {
 
     var node = {
       services: {
-        dashd: {
+        galactrumd: {
           getInfo: sinon.stub().callsArgWith(0, null, info),
           getBestBlockHash: sinon.stub().callsArgWith(0, null, outSetInfo.bestblock),
           tiphash: outSetInfo.bestblock
@@ -116,7 +116,7 @@ describe('Status', function() {
     it('should have correct data', function(done) {
       var node = {
         services: {
-          dashd: {
+          galactrumd: {
             height: 500000,
             isSynced: sinon.stub().callsArgWith(0, null, true),
             syncPercentage: sinon.stub().callsArgWith(0, null, 99.99)
@@ -130,7 +130,7 @@ describe('Status', function() {
         syncPercentage: 100,
         height: 500000,
         error: null,
-        type: 'bitcore node'
+        type: 'orecore node'
       };
 
       var status = new StatusController(node);
