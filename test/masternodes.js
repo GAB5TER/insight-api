@@ -54,7 +54,7 @@ describe('Masternode', function() {
 		}];
 		var node = {
 			services: {
-        dashd: {
+        galactrumd: {
 					getMNList: sinon.stub().callsArgWith(0, null, MNList)
 				}
 			}
