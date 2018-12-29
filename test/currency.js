@@ -7,31 +7,37 @@ var CurrencyController = require('../lib/currency');
 
 describe('Currency', function() {
 
-  var dashCentralData = {
-    general: {
-      consensus_blockheight: 561311,
-      consensus_version: 120058,
-      consensus_protocolversion: 70103,
-      all_user: 687,
-      active_user: 372,
-      registered_masternodes: 1583,
-      registered_masternodes_verified: 770
-    },
-    exchange_rates: {
-      dash_usd: 9.4858840414,
-      btc_usd: 682.93,
-      btc_dash: 0.01388998
+  var galactrumData = [
+    {
+        "id": "galactrum", 
+        "name": "Galactrum", 
+        "symbol": "ORE", 
+        "rank": "1314", 
+        "price_usd": "0.1369563055", 
+        "price_btc": "0.00003310", 
+        "24h_volume_usd": "491.114597223", 
+        "market_cap_usd": "360806.0", 
+        "available_supply": "2634461.0", 
+        "total_supply": "3354461.0", 
+        "max_supply": null, 
+        "percent_change_1h": "0.01", 
+        "percent_change_24h": "-0.85", 
+        "percent_change_7d": "-10.2", 
+        "last_updated": "1543734259"
     }
-  };
-
-  it.skip('will make live request to dash central', function(done) {
+  ];
+  it('will make live request to coinmarketcap', function(done) {
     var currency = new CurrencyController({});
     var req = {};
     var res = {
       jsonp: function(response) {
         response.status.should.equal(200);
-        should.exist(response.data.dash_usd);
-        (typeof response.data.dash_usd).should.equal('number');
+        should.exist(response.data.ore_usd);
+        (typeof response.data.ore_usd).should.equal('number');
+        should.exist(response.data.ore_btc);
+        (typeof response.data.ore_btc).should.equal('number');
+        should.exist(response.data.btc_usd);
+        (typeof response.data.btc_usd).should.equal('number');
         done();
       }
     };
@@ -40,7 +46,7 @@ describe('Currency', function() {
 
   it('will retrieve a fresh value', function(done) {
     var TestCurrencyController = proxyquire('../lib/currency', {
-      request: sinon.stub().callsArgWith(1, null, {statusCode: 200}, JSON.stringify(dashCentralData))
+      request: sinon.stub().callsArgWith(1, null, {statusCode: 200}, JSON.stringify(galactrumData))
     });
     var node = {
       log: {
@@ -49,17 +55,17 @@ describe('Currency', function() {
     };
     var currency = new TestCurrencyController({node: node});
     currency.exchange_rates = {
-      dash_usd: 9.4858840414,
+      ore_usd: 0.1369563055,
       btc_usd: 682.93,
-      btc_dash: 0.01388998
+      ore_btc: 0.01388998
     };
     currency.timestamp = Date.now() - 61000 * CurrencyController.DEFAULT_CURRENCY_DELAY;
     var req = {};
     var res = {
       jsonp: function(response) {
         response.status.should.equal(200);
-        should.exist(response.data.dash_usd);
-        response.data.dash_usd.should.equal(9.4858840414);
+        should.exist(response.data.ore_usd);
+        response.data.ore_usd.should.equal(0.1369563055);
         done();
       }
     };
@@ -77,9 +83,9 @@ describe('Currency', function() {
     };
     var currency = new TestCurrencyController({node: node});
     currency.exchange_rates = {
-      dash_usd: 9.4858840414,
+      ore_usd: 9.4858840414,
       btc_usd: 682.93,
-      btc_dash: 0.01388998
+      ore_btc: 0.01388998
     };
     currency.timestamp = Date.now() - 65000 * CurrencyController.DEFAULT_CURRENCY_DELAY;
     var req = {};
@@ -87,8 +93,8 @@ describe('Currency', function() {
       jsonp: function(response) {
         response.status.should.equal(200);
         should.exist(response.data);
-        response.data.dash_usd.should.equal(9.4858840414);
-        node.log.error.callCount.should.equal(1);
+        response.data.ore_usd.should.equal(9.4858840414);
+        node.log.error.callCount.should.equal(2);
         done();
       }
     };
@@ -107,17 +113,17 @@ describe('Currency', function() {
     };
     var currency = new TestCurrencyController({node: node});
     currency.exchange_rates = {
-      dash_usd: 9.4858840414,
+      ore_usd: 9.4858840414,
       btc_usd: 682.93,
-      btc_dash: 0.01388998
+      ore_btc: 0.01388998
     };
     currency.timestamp = Date.now();
     var req = {};
     var res = {
       jsonp: function(response) {
         response.status.should.equal(200);
-        should.exist(response.data.dash_usd);
-        response.data.dash_usd.should.equal(9.4858840414);
+        should.exist(response.data.ore_usd);
+        response.data.ore_usd.should.equal(9.4858840414);
         request.callCount.should.equal(0);
         done();
       }
