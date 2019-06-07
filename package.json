@@ -1,7 +1,7 @@
 {
   "name": "insight-api",
   "description": "A Galactrum blockchain REST and web socket API service for Orecore Node.",
-  "version": "1.0.1",
+  "version": "2.3.0",
   "repository": "git://github.com/GAB5TER/insight-api.git",
   "contributors": [
     {
@@ -52,28 +52,27 @@
     "orecore"
   ],
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=6"
   },
   "scripts": {
     "test": "NODE_ENV=test mocha -R spec --recursive"
   },
-  "main": "lib",
-  "orecoreNode": "lib",
+  "main": "lib/index.js",
   "dependencies": {
-    "async": "*",
+    "async": "^2.6.1",
     "orecore-lib": "GAB5TER/orecore-lib",
-    "body-parser": "^1.13.3",
-    "compression": "^1.6.1",
-    "lodash": "=4.17.1",
-    "lru-cache": "^4.0.1",
-    "morgan": "^1.7.0",
-    "request": "^2.64.0"
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "lodash": "^4.17.11",
+    "lru-cache": "^5.1.1",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5",
-    "proxyquire": "^1.7.2",
-    "should": "^8.3.1",
-    "sinon": "^1.10.3"
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "proxyquire": "^1.8.0",
+    "should": "^13.2.3",
+    "sinon": "^7.1.1"
   }
 }

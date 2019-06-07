@@ -1,0 +1,21 @@
+{
+  "network": "livenet",
+  "port": 3001,
+  "services": [
+    "galactrumd",
+    "web",
+    "insight-api"
+  ],
+  "servicesConfig": {
+    "galactrumd": {
+      "connect": [{
+        "rpchost": "127.0.0.1",
+        "rpcport": 6269,
+        "rpcuser": "user",
+        "rpcpassword": "pass",
+        "zmqpubrawtx": "tcp://127.0.0.1:26269",
+        "zmqpubhashblock": "tcp://127.0.0.1:26269"
+      }]
+    }
+  }
+}
