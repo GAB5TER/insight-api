@@ -1,7 +1,7 @@
 {
   "name": "insight-api",
   "description": "A Galactrum blockchain REST and web socket API service for Orecore Node.",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "repository": "git://github.com/GAB5TER/insight-api.git",
   "contributors": [
     {
