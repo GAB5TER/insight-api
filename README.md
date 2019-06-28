@@ -158,11 +158,7 @@ Example response:
       "size": 312,
       "hash": "00000000ee9a976cf459240c2add1147137ca6126b7906fa13ce3d80b5cadcc7",
       "time": 1492905418,
-      "txlength": 1,
-      "poolInfo": {
-        "poolName": "BTCC Pool",
-        "url": "https://pool.btcc.com/"
-      }
+      "txlength": 1
     },{...},{...}
   ],
   "length": 3,
